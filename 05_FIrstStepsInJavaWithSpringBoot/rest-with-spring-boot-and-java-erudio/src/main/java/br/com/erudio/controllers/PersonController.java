@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.erudio.data.vo.v1.PersonVO;
-import br.com.erudio.data.vo.v2.PersonVOV2;
 import br.com.erudio.services.PersonServices;
 
 @RestController
@@ -25,13 +24,13 @@ public class PersonController {
 	private PersonServices service;
 	
 	@GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
-	public PersonVO FindByID(
+	public PersonVO findById(
 			@PathVariable(value = "id") Long id) throws Exception {
 		return service.findById(id);
 	}
 	
 	@GetMapping( produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public List<PersonVO> FindAll() throws Exception {
+	public List<PersonVO> findAll() throws Exception {
 		return service.findAll();
 	}
 	
@@ -42,13 +41,6 @@ public class PersonController {
 		return service.create(person);
 	}
 	
-	@PostMapping(
-			value = "/v2",
-			consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
-			produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public PersonVOV2 createV2(@RequestBody PersonVOV2 person) throws Exception {
-		return service.createV2(person);
-	}
 	
 	@PutMapping(
 			consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
